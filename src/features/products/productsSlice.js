@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const BASE_URL = 'https://fakestoreapi.com';
+const BASE_URL = 'https://67e43b942ae442db76d39cad.mockapi.io/api';
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',

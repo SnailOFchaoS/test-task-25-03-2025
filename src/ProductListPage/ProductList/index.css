@@ -1,13 +1,9 @@
-/* .main-block-wrapper {
-  display: flex;
-	flex-direction: row;
-  flex-wrap: wrap;
-  background-color: rgba(255, 182, 193, 0.5);
-} */
-
 .products-main-wrapper {
   display: flex;
 	flex-direction: row;
   flex-wrap: wrap;
   background-color: rgba(255, 182, 193, 0.5);
+  justify-content: space-around;
+  padding-left: 15vw;
+  padding-right: 15vw;
 }
