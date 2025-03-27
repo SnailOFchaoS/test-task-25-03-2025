@@ -1,5 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import imagePlaceholder from "../../../assets/image-placeholder.svg";
+import gsap from "gsap";
+
+import { ReactComponent as ImagePlaceholder } from '../../../assets/image-placeholder.svg';
+import { ReactComponent as TrashBinImage } from '../../../assets/image-placeholder.svg';
+import likeImage from "../../../assets/like.svg";
+// import trashBinImage from "../../../assets/trash-bin.svg"
+
 
 import "./index.scss"
 
@@ -7,12 +13,27 @@ const ProductPreview = ({product, index}) => {
   const [imageError, setImageError ] = useState(false)
   const [showGradient, setShowGradient] = useState(false);
   const descriptionRef = useRef(null)
+	const trashButtonRef  = useRef(null)
 
   const checkImage = () => {
     return setImageError(true);
   }
 
+	const onTrashButtonClicked = () => {
+		return gsap.fromTo(trashButtonRef.current, {
+			y: 0,
+		},{
+			y: -20,
+			duration: 0.3,
+			ease: "power2.inOut",
+			repeat: 1,
+			yoyo: true,
+		})
+	}
+
   useEffect(() => {
+
+		console.log("ImagePlaceholder", ImagePlaceholder)
     const checkTextHeight = () => {
       if (descriptionRef.current) {
         requestAnimationFrame(() => { 
@@ -35,14 +56,15 @@ const ProductPreview = ({product, index}) => {
     };
   }, []);
 
+	// useEffect(() => {
+	// 	trashButtonRef.current.setProperty('--trash-bin-image', `url(${trashBinImage})`)
+	// }, [trashBinImage])
+
 	return (
 		<div className="main-block-wrapper" key = {index}>
 			<div className="image-wrapper">
         {imageError ? (
-          <img src = {imagePlaceholder}
-            alt="Placeholder" 
-            className="image"
-          />
+          <ImagePlaceholder/>
         ) : (
           <img src = {product.image}
             alt={product.name} 
@@ -70,6 +92,10 @@ const ProductPreview = ({product, index}) => {
           {product.description}
         </span >
       </div>
+			<TrashBinImage  
+				className="trash-bin-button"
+				ref={trashButtonRef} 
+				onClick = {onTrashButtonClicked}/>
 		</div>
 	);
 }

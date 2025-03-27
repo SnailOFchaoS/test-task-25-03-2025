@@ -1,3 +1,5 @@
+// $trash-bin-image: "../../../assets/trash-bin.svg";
+
 @mixin product-page-text{
   display: flex;
   flex-direction: row;
@@ -97,3 +99,24 @@
   height: 30px;
   background: linear-gradient(to bottom, rgb(255, 255, 255, 0), rgb(255, 255, 255, 1));
 }
+
+.trash-bin-button{
+  position: absolute;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  // border: 1px solid #ccc;
+  bottom: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.trash-bin-button:hover {
+  color: red;
+  // fill: red
+}
+
+
+// .like-button{
+
+// }

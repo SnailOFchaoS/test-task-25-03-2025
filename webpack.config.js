@@ -66,19 +66,28 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
-      {
-        test: /\.svg$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]', 
-              outputPath: 'assets',
-              publicPath: 'assets',
-            },
-          },
-        ],
+      // {
+      //   test: /\.svg$/,
+      //   use: [
+      //     {
+      //       loader: 'file-loader',
+      //       options: {
+      //         name: '[name].[ext]', 
+      //         // outputPath: 'assets',
+      //         publicPath: '/',
+      //       },
+      //     },
+      //   ],
+      // },
+        {
+          test: /\.svg$/i,
+          issuer: /\.[jt]sx?$/,
+          use: ['@svgr/webpack', 'url-loader'],
       },
+      // {
+      //   test: /\.svg$/,
+      //   use: ['@svgr/webpack'],
+      // },
     ],
   },
   plugins: [
