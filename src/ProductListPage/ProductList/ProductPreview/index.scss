@@ -39,7 +39,8 @@
 .image{
 	max-width: 100%;
 	max-height: 100%;
-	height: auto;
+	display: block;
+  object-fit: contain;
 }
 
 .info-wrapper{
@@ -100,20 +101,24 @@
   background: linear-gradient(to bottom, rgb(255, 255, 255, 0), rgb(255, 255, 255, 1));
 }
 
-.trash-bin-button{
+.trash-bin-button {
   position: absolute;
   z-index: 1;
   width: 30px;
   height: 30px;
-  // border: 1px solid #ccc;
   bottom: 0;
   left: 0;
   cursor: pointer;
 }
 
-.trash-bin-button:hover {
-  color: red;
-  // fill: red
+.like-button {
+  position: absolute;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
 }
 
 
