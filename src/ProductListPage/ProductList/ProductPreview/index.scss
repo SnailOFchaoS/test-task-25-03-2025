@@ -1,3 +1,5 @@
+// $trash-bin-image: "../../../assets/trash-bin.svg";
+
 @mixin product-page-text{
   display: flex;
   flex-direction: row;
@@ -37,7 +39,8 @@
 .image{
 	max-width: 100%;
 	max-height: 100%;
-	height: auto;
+	display: block;
+  object-fit: contain;
 }
 
 .info-wrapper{
@@ -97,3 +100,28 @@
   height: 30px;
   background: linear-gradient(to bottom, rgb(255, 255, 255, 0), rgb(255, 255, 255, 1));
 }
+
+.trash-bin-button {
+  position: absolute;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  bottom: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.like-button {
+  position: absolute;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+
+// .like-button{
+
+// }
