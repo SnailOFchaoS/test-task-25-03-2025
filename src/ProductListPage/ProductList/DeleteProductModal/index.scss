@@ -1,0 +1,47 @@
+@mixin product-page-text{
+  display: flex;
+  flex-direction: row;
+  font-family: "Open Sans", monospace;
+  font-weight: 600;
+  font-size: 18px;
+  max-width: 100%;
+  text-wrap: wrap;
+  margin: 0%;
+}
+
+.delete-modal{
+  .name-text-font{
+    @include product-page-text;
+  }
+
+  .delete-product-button{
+    @include product-page-text;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 168px;
+    height: 50px;
+    background-color: aqua;
+    border: 0 solid transparent;
+    border-radius: 10px;
+    margin-top: 50px;
+    cursor: pointer;
+  }
+
+  .disabled-delete-product-button{
+    @include product-page-text;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 168px;
+    height: 50px;
+    background-color: aqua;
+    border: 0 solid transparent;
+    border-radius: 10px;
+    margin-top: 50px;
+    pointer-events: none;
+    cursor: none;
+    color: gray;
+  }
+}
+

@@ -1,0 +1,14 @@
+.turn-back-button-wrapper{
+  align-items: center; 
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+
+  .my-button-image{
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    pointer-events: none;
+  }
+}

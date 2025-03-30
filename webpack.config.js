@@ -29,9 +29,65 @@ module.exports = {
         },
       },
       {
+        test: /\.module\.scss$/, // SCSS Modules файлы (.module.scss)
+        use: [
+          'style-loader', // Вставляем стили в DOM
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[name]__[local]--[hash:base64:5]', // Имена классов для CSS Modules
+              },
+              sourceMap: true,
+              importLoaders: 2,
+            },
+          },
+          'postcss-loader', // Для Autoprefixer
+          'sass-loader', // Компилируем SCSS в CSS
+        ],
+      },
+      {
+        test: /\.scss$/, // Обычные SCSS файлы (без CSS Modules)
+        exclude: /\.module\.scss$/,
+        use: [
+          'style-loader', // Вставляем стили в DOM
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true, // Включаем Source Maps
+              importLoaders: 2, //  Чтобы Sass Loader обработал @import
+            },
+          },
+          'postcss-loader', // Для Autoprefixer
+          'sass-loader', // Компилируем SCSS в CSS
+        ],
+      },
+      {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
+      // {
+      //   test: /\.svg$/,
+      //   use: [
+      //     {
+      //       loader: 'file-loader',
+      //       options: {
+      //         name: '[name].[ext]', 
+      //         // outputPath: 'assets',
+      //         publicPath: '/',
+      //       },
+      //     },
+      //   ],
+      // },
+        {
+          test: /\.svg$/i,
+          issuer: /\.[jt]sx?$/,
+          use: ['@svgr/webpack', 'url-loader'],
+      },
+      // {
+      //   test: /\.svg$/,
+      //   use: ['@svgr/webpack'],
+      // },
     ],
   },
   plugins: [
