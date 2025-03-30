@@ -1,28 +1,16 @@
-import React, {useEffect, useState} from "react";
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchProducts,
-    selectAllProducts,
-    selectProductsStatus,
-    selectProductsError} from '../../features/products/productsSlice.js';
+import React, {useContext, useState} from "react";
+import { useSelector } from 'react-redux';
+import {selectProductsStatus } from '../../features/products/productsSlice.js';
 
 import ProductPreview from "./ProductPreview";
-import "./index.css"
+import {ProductListPageContext} from "../index.js"
+import "./index.scss"
 
 const ProductList = () => {
-	const dispatch = useDispatch();
-	const [currentProducts, setCurrentProducts] = useState([])
-  const products = useSelector(selectAllProducts);
   const status = useSelector(selectProductsStatus);
-  const error = useSelector(selectProductsError);
+  const [checkIsModalOpen, setCheckIsModalOpen] = useState(false);
 
-	useEffect(() => {
-		if (status === 'idle') {
-			dispatch(fetchProducts());
-		}
-    if(status === 'succeeded'){
-      setCurrentProducts(products)
-    }
-  }, [status, dispatch]);
+  const {currentProducts} = useContext(ProductListPageContext)
 
 	if (status === 'loading') {
     return <p>Loading products...</p>;
@@ -31,14 +19,13 @@ const ProductList = () => {
   if (status === 'failed') {
     return <p>Server Error</p>;
   }
-	
 	return (
-		<div className="products-main-wrapper">
-			{currentProducts.map((product, index) => (
+		<div className={`products-main-wrapper ${checkIsModalOpen ? 'modal-is-opened' : ''}`}>
+			{currentProducts.map((product) => (
 				<ProductPreview 
           key = {product.id}
 					product = {product}
-					index = {product.id}
+          setCheckIsModalOpen = {setCheckIsModalOpen}
 				/>
 			))}
 		</div>

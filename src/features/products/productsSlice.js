@@ -29,6 +29,47 @@ export const fetchProduct = createAsyncThunk(
   }
 );
 
+export const addProduct = createAsyncThunk(
+  'products/addProduct',
+  async (productData) => {
+    try {
+      const response = await axios.post(`${BASE_URL}/products`, productData);
+      return response.data;
+    } catch (error) {
+      console.error(`Error adding product :`, error);
+      throw error;
+    }
+  }
+);
+
+export const editProduct = createAsyncThunk(
+  'products/editProduct',
+  async ({productId, productData}) => {
+    console.log("productId:", productId);
+    console.log("productData:", productData);
+    try {
+      const response = await axios.put(`${BASE_URL}/products/${productId}`, productData);
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching product with ID ${productId}:`, error);
+      throw error;
+    }
+  }
+);
+
+export const deleteProduct = createAsyncThunk(
+  'products/deleteProduct',
+  async (productId) => {
+    try {
+      const response = await axios.delete(`${BASE_URL}/products/${productId}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error adding product :`, error);
+      throw error;
+    }
+  }
+);
+
 const initialState = {
   products: [],
   product: null,
@@ -68,11 +109,29 @@ const productsSlice = createSlice({
       .addCase(fetchProduct.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
+      })
+      .addCase(addProduct.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(addProduct.fulfilled, (state) => {
+        state.status = 'succeeded';
+      })
+      .addCase(addProduct.rejected, (state) => {
+        state.status = 'failed';
+      })
+      .addCase(deleteProduct.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(deleteProduct.fulfilled, (state) => {
+        state.status = 'succeeded';
+      })
+      .addCase(deleteProduct.rejected, (state) => {
+        state.status = 'failed';
       });
   },
 });
 
-export const { clearProduct } = productsSlice.actions;  // Экспортируем action
+export const { clearProduct } = productsSlice.actions;
 
 export const selectAllProducts = (state) => state.products.products;
 export const selectProduct = (state) => state.products.product;

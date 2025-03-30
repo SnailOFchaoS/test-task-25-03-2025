@@ -4,6 +4,8 @@ import { Provider } from 'react-redux';
 import { store } from './app/store';
 
 import ProductListPage from './ProductListPage'
+import ProductPage from './ProductPage';
+import ProductAddPage from './ProductAddPage';
 import './App.css';
 
 function App() {
@@ -13,6 +15,9 @@ function App() {
         <Routes>
           <Route path = "/" element = {<Navigate to = "/products"/>}/>
           <Route path = "/products" element = {<ProductListPage />}/>
+          <Route path = "/products/:id" element = {<ProductPage />}/>
+          <Route path = "/products/create" element = {<ProductAddPage />}/>
+          <Route path = "/products/edit/:id" element = {<ProductAddPage />}/>
         </Routes>
       </Router>
     </Provider>
