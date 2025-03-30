@@ -1,19 +1,19 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // Импортируем плагин для работы с HTML
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  mode: 'development', // Или 'production'
+  mode: 'production',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/', // Важно! Укажите publicPath
+    publicPath: '/test-task-25-03-2025/',
   },
   devServer: {
     static: {
       directory: path.join(__dirname, 'dist'),
     },
-    historyApiFallback: true, // Важно! Добавьте historyApiFallback
+    historyApiFallback: true,
     port: 3000,
   },
   module: {
@@ -29,70 +29,53 @@ module.exports = {
         },
       },
       {
-        test: /\.module\.scss$/, // SCSS Modules файлы (.module.scss)
+        test: /\.module\.scss$/,
         use: [
-          'style-loader', // Вставляем стили в DOM
+          'style-loader',
           {
             loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: '[name]__[local]--[hash:base64:5]', // Имена классов для CSS Modules
+                localIdentName: '[name]__[local]--[hash:base64:5]',
               },
               sourceMap: true,
               importLoaders: 2,
             },
           },
-          'postcss-loader', // Для Autoprefixer
-          'sass-loader', // Компилируем SCSS в CSS
+          'postcss-loader',
+          'sass-loader',
         ],
       },
       {
-        test: /\.scss$/, // Обычные SCSS файлы (без CSS Modules)
+        test: /\.scss$/,
         exclude: /\.module\.scss$/,
         use: [
-          'style-loader', // Вставляем стили в DOM
+          'style-loader',
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true, // Включаем Source Maps
-              importLoaders: 2, //  Чтобы Sass Loader обработал @import
+              sourceMap: true,
+              importLoaders: 2,
             },
           },
-          'postcss-loader', // Для Autoprefixer
-          'sass-loader', // Компилируем SCSS в CSS
+          'postcss-loader',
+          'sass-loader',
         ],
       },
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
-      // {
-      //   test: /\.svg$/,
-      //   use: [
-      //     {
-      //       loader: 'file-loader',
-      //       options: {
-      //         name: '[name].[ext]', 
-      //         // outputPath: 'assets',
-      //         publicPath: '/',
-      //       },
-      //     },
-      //   ],
-      // },
         {
           test: /\.svg$/i,
           issuer: /\.[jt]sx?$/,
           use: ['@svgr/webpack', 'url-loader'],
       },
-      // {
-      //   test: /\.svg$/,
-      //   use: ['@svgr/webpack'],
-      // },
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({ // Плагин для генерации HTML-файла
-      template: './public/index.html', // Путь к вашему HTML-шаблону
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
     }),
   ],
 };
